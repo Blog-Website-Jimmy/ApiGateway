@@ -12,7 +12,8 @@ public class ApiGatewayApplication {
 		SpringApplication.run(ApiGatewayApplication.class, args);
 	}
 
-//	public GlobalFilter authFilter() {
-//		return new AuthFilter();
-//	}
+	@Bean
+	public GlobalFilter authFilter() {
+		return new AuthFilter();
+	}
 }

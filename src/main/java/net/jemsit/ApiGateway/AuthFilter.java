@@ -1,15 +1,18 @@
 package net.jemsit.ApiGateway;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 public class AuthFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        return exchange.getResponse().setComplete();
+        log.info("jimi headers =>{}", exchange.getResponse().getHeaders());
+        return chain.filter(exchange);
     }
 
     @Override
