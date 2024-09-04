@@ -1,23 +1,21 @@
 spring:
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
       routes:
         - id: auth-service
           uri: ${AUTH_SERVICE}
           predicates:
             - Path=/auth/**,
-          metadata:
-            cors:
-              allowedOrigins: '*'
-              allowedMethods:
-                - GET
-                - POST
-              allowedHeaders: '*'
-              maxAge: 30
         - id: blog-service
           uri: ${BLOG_SERVICE}
           predicates:
-            - Path=/article/**, /author/**, /category/**,
+            - Path=/article/**, /author/**, /category/**, /Images/**
   config:
     import: optional:file:.env[.properties]
   application:
